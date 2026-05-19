@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.scss';
 import { GoodsList } from './GoodsList';
 
-import { getAll } from './api/goods';
+import { getAll, get5First, getRedGoods } from './api/goods';
 // or
 // import * as goodsAPI from './api/goods';
 
@@ -15,13 +15,11 @@ export const App: React.FC = () => {
   };
 
   const handleGet5First = () => {
-    getAll().then(data =>
-      setGoods(data.sort((a, b) => a.name.localeCompare(b.name)).slice(0, 5)),
-    );
+    get5First().then(data => setGoods(data));
   };
 
   const handleGetRedGoods = () => {
-    getAll().then(data => setGoods(data.filter(dat => dat.color === 'red')));
+    getRedGoods().then(data => setGoods(data));
   };
 
   return (
